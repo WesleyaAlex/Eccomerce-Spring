@@ -4,6 +4,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,11 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/backoffice/usuario/salvar")
-	public String salvarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario) {
+	public String salvarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "backoffice/usuario/form";
+		}
+		
 		usuario.setStatus(true);
 		usuarioRepo.save(usuario);
 		

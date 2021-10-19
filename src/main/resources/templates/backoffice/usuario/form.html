@@ -15,15 +15,19 @@
 			<input type="hidden" id="id" th:field="*{id}">
 			
 			<label class="form-label">Nome: </label>
+			<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger d-block"></span>
 			<input type="text" th:field="*{nome}" class="form-control mb-4 col-4">
 			
 			<label class="form-label">Email: </label>
+			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger d-block"></span>
       		<input  type="text" th:field="*{email}" class="form-control mb-4 col-4">
       		
       		<label class="form-label">CPF: </label>
+      		<span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-danger d-block"></span>
       		<input type="text" th:field="*{cpf}" class="form-control mb-4 col-4">
       		
       		<label class="form-label">Grupo: </label>
+      		<span th:if="${#fields.hasErrors('grupo')}" th:errors="*{grupo}" class="text-danger d-block"></span>
 			<select th:field="*{grupo}" class="form-control mb-4 col-4" required>
 	          <option value="admin">Admin</option>
 	          <option value="estoquista">Estoquista</option>
@@ -31,9 +35,11 @@
 	        </select>
 			
 			<label class="form-label">Senha: </label>
+			<span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger d-block"></span>
 			<input type="text" th:field="*{senha}" class="form-control mb-4 col-4">
 			
 			<label class="form-label">Confirme a senha: </label>
+			<span th:if="${#fields.hasErrors('confirmSenha')}" th:errors="*{confirmSenha}" class="text-danger d-block"></span>
 			<input type="text" th:field="*{confirmSenha}" class="form-control mb-4 col-4">
 			
 			<button type="submit" class="btn btn-info col-2">Salvar</button>

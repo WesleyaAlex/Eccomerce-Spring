@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Usuario {
@@ -12,16 +14,23 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
+	@NotBlank(message = "O campo email não pode estar vazio!")
+	@Email(message = "O campo email deve estar no formato correto!")
     private String email;
     
+	@NotBlank(message = "O campo email não pode estar vazio!")
     private String senha;
     
+	@NotBlank(message = "O campo email não pode estar vazio!")
     private String confirmSenha;
 
+	@NotBlank(message = "O campo email não pode estar vazio!")
     private String nome;
     
+	@NotBlank(message = "O campo email não pode estar vazio!")
     private String cpf;
     
+	@NotBlank(message = "O campo email não pode estar vazio!")
     private String grupo;
     
     private boolean status;
