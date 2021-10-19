@@ -6,7 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import eccomerce.spring.admin.models.Produto;
+import eccomerce.spring.admin.models.Usuario;
 import eccomerce.spring.admin.repositories.ProdutoRepositorio;
+import eccomerce.spring.admin.repositories.UsuarioRepositorio;
 
 @Component
 @Transactional
@@ -14,6 +16,9 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 
 	@Autowired
 	private ProdutoRepositorio produtoRepo;
+	
+	@Autowired
+	private UsuarioRepositorio userRepo;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -25,6 +30,8 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 		Produto produto6 = new Produto("PS4", "Esse é mais caro", 1299.99, 5, true,"circulo.jpg");
 		Produto produto7 = new Produto("Xbox", "Esse é mais barato", 399.99, 10, true,"circulo.jpg");
 		Produto produto8 = new Produto("PS4", "Esse é mais caro", 1299.99, 5, true,"circulo.jpg");
+		
+		Usuario user1 = new Usuario("admin@email.com", "admin", "admin", "admin", "50501985859", "admin", true);
 		 
 		produtoRepo.save(produto1);
 		produtoRepo.save(produto2);
@@ -34,5 +41,7 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 		produtoRepo.save(produto6);
 		produtoRepo.save(produto7);
 		produtoRepo.save(produto8);
+		
+		userRepo.save(user1);
 	}
 }

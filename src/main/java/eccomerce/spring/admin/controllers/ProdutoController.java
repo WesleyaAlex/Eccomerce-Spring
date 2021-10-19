@@ -68,7 +68,8 @@ public class ProdutoController {
 		
 		if(produto.getImg() == null) {
 			produto.setImg(files[0].getOriginalFilename());
-		} 
+		}
+		produto.setStatus(true);
 		produtoRepo.save(produto);
 		
 		StringBuilder fileNames = new StringBuilder();
