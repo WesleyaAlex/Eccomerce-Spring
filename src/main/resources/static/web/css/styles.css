@@ -1,0 +1,36 @@
+@media(max-width: 992px) {
+    .column-data {
+         margin: 30px;
+    }
+}
+
+@media(max-width: 992px) {
+     .card {
+         margin: 0 auto;
+     }
+}
+        
+.logo {
+     width: 135px; 
+  	 height: 60px;
+}
+        
+@media(max-width: 568px) {
+     .logo {
+	      width: 100px;
+	      height: 50px;
+	 }
+}
+
+.div-card {
+	max-width: 18rem; 
+	height: 18rem;
+}
+
+.img-card {
+	height: 13rem;
+}
+
+.carousel-item {
+	height: 18rem;
+}
