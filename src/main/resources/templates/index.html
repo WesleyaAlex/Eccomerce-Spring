@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/web/styles.css" />
+    <title>Eccommerce - Spring Boot</title>
+  </head>
+  <body class="bg-light">
+	  <div class="container-fluid px-md-4 px-2 bg-warning">
+	    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-between py-3 mb-4 border-bottom">
+	      <a href="/" class="mb-2 text-dark text-decoration-none">
+	        <img src="assets/images/logo-vasos.png" class="logo" alt="img-logo">
+	      </a>
+	
+	      <div> 
+            <a href ="/" class="me-1"><img src="assets/images/login.png" alt="Login"></a><span class="me-3">Login</span>
+            <a href ="/" class="me-1"><img src="assets/images/registration.png" alt="Registrar"></a><span class="me-3">Criar login</span>
+            <a href ="/" class="me-3"><img src="assets/images/carrinho.png" alt="Comprar"></a>
+	      </div>
+	    </header>
+	  </div>
+  
+    <div class="container">
+        <div class="row mt-3">
+            <div th:each="produto : ${listaProdutos}" class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-3">
+                <div class="card p-3 bg-white shadow" style="max-width: 18rem; max-height: 20rem;">
+                    <img th:src="@{/backoffice/produto/mostrarImagem/{imagem}(imagem=${produto.img})}" class="img-fluid" alt="Card image cap" style=" max-height: 13rem;">
+                    <div>
+                      <h5 class="mt-2 mb-1" th:text="${produto.nome}"></h5>
+                      <div class="d-flex justify-content-between">
+                        <span class="mt-1" th:text="'R$ ' + ${produto.preco}">R$ 299,00</span>
+                        <a th:href="@{/produto/detalhes-eccomerce/{id}(id=${produto.id})}"><img src="assets/images/detalhes.png" alt="detalhes"></a>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  </body>
+</html>
