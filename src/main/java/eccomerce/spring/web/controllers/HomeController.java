@@ -38,7 +38,7 @@ public class HomeController {
 		}
 		
 		model.addAttribute("produto", produto.get());
-		model.addAttribute("imagens", produtoImagensRepo.findAll());
+		model.addAttribute("imagens", produtoImagensRepo.findAllByProdutoId(produto.get().getId()));
 		return "detalhesProduto";
 	}
 }

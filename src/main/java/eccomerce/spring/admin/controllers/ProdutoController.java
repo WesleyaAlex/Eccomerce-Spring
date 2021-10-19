@@ -65,7 +65,10 @@ public class ProdutoController {
 		if (bindingResult.hasErrors()) {
 			return "backoffice/produto/form";
 		}
-		produto.setImg(files[0].getOriginalFilename());
+		
+		if(produto.getImg() == null) {
+			produto.setImg(files[0].getOriginalFilename());
+		} 
 		produtoRepo.save(produto);
 		
 		StringBuilder fileNames = new StringBuilder();
@@ -103,7 +106,7 @@ public class ProdutoController {
 		}
 		
 		model.addAttribute("produto", produto.get());
-		model.addAttribute("imagens", produtoImagensRepo.findAll());
+		model.addAttribute("imagens", produtoImagensRepo.findAllByProdutoId(produto.get().getId()));
 		return "backoffice/produto/detalhesProduto";
 	}
 	

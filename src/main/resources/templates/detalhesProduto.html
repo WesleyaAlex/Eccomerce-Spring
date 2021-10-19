@@ -30,7 +30,7 @@
 				    <div class="carousel-item active">
 				      <img th:src="@{/backoffice/produto/mostrarImagem/{imagem}(imagem=${produto.img})}" class="w-100 h-100 img-fluid" alt="..."> 
 				    </div>
-				    <div th:each="img : ${imagens}" class="carousel-item">
+				    <div th:each="img : ${imagens}" th:if="${img.url != produto.img}" class="carousel-item">
 				      <img th:src="@{/backoffice/produto/mostrarImagem/{imagem}(imagem=${img.url})}" class="w-100 h-100 img-fluid" alt="..."> 
 				    </div>
 				  </div>
