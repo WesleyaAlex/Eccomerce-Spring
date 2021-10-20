@@ -62,7 +62,12 @@ public class UsuarioController {
 			throw new IllegalArgumentException("usuario inválido!");
 		}
 		
-		usuarioRepo.delete(usuario.get());
+		if (usuario.get().getStatus()) {
+			usuario.get().setStatus(false);
+		} else {
+			usuario.get().setStatus(true);
+		}
+		usuarioRepo.save(usuario.get());
 		return "redirect:/backoffice/usuarios";
 	}
 }

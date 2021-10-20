@@ -95,7 +95,12 @@ public class ProdutoController {
 			throw new IllegalArgumentException("Produto inválido!");
 		}
 		
-		produtoRepo.delete(produto.get());
+		if (produto.get().isStatus()) {
+			produto.get().setStatus(false);
+		} else {
+			produto.get().setStatus(true);
+		}
+		produtoRepo.save(produto.get());
 		return "redirect:/backoffice/produtos";
 	}
 	

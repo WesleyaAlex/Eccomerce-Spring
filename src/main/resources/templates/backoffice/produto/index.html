@@ -8,6 +8,19 @@
 
 </head>
 <body>
+	<div class="container-fluid bg-secondary">
+		<nav class="container d-flex justify-content-between align-items-center py-3">
+		  <img src="" alt="img-logo">
+		  <div class="d-flex align-items-center">
+		  	<div class="d-flex align-items-center">
+		  		<a class="btn btn-outline-info mr-3" href="/backoffice/produtos">Listar Produtos</a>
+		        <a class="btn btn-outline-info mr-3" href="/backoffice/usuarios">Listar Usuários</a>
+		  	</div>
+		    <img src="" alt="img-logout">
+		  </div>
+		</nav>
+	</div>
+	
 	<div class="container my-2">
 		<div class="d-flex justify-content-between mb-3">
 			<h1>Produtos</h1>
@@ -30,10 +43,10 @@
 					<td th:text="${produto.descricao}"></td>
 					<td th:text="'R$ ' + ${produto.preco}"></td>
 					<td th:text="${produto.quantidade}"></td>
-					<td th:text="${produto.status}"></td>
+					<td th:text="${produto.status} ? 'ativo' : 'inativo'"></td>
 					<td>
 						<a th:href="@{/backoffice/produto/{id}(id=${produto.id})}" class="btn btn-primary">Alterar</a>
-						<a th:href="@{/backoffice/produto/excluir/{id}(id=${produto.id})}" class="btn btn-danger">Excluir</a>
+						<a th:href="@{/backoffice/produto/excluir/{id}(id=${produto.id})}" class="btn btn-danger" th:text="${produto.status} ? 'inativar' : 'ativar'">Excluir</a>
 						<a th:href="@{/backoffice/produto/detalhes/{id}(id=${produto.id})}" class="btn btn-success">Detalhes</a>
 					</td>
 				</tr>

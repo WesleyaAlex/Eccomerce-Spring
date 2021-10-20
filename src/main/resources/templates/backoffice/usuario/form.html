@@ -8,6 +8,19 @@
 
 </head>
 <body>
+	<div class="container-fluid bg-secondary">
+		<nav class="container d-flex justify-content-between align-items-center py-3">
+		  <img src="" alt="img-logo">
+		  <div class="d-flex align-items-center">
+		  	<div class="d-flex align-items-center">
+		  		<a class="btn btn-outline-info mr-3" href="/backoffice/produtos">Listar Produtos</a>
+		        <a class="btn btn-outline-info mr-3" href="/backoffice/usuarios">Listar Usuários</a>
+		  	</div>
+		    <img src="" alt="img-logout">
+		  </div>
+		</nav>
+	</div>
+	
 	<div class="container my-2">
 		<h1>Usuário</h1>
 		<hr>
@@ -44,8 +57,6 @@
 			
 			<button type="submit" class="btn btn-info col-2">Salvar</button>
 		</form>
-		<hr>
-		<a th:href="@{/backoffice/usuarios}">Retornar para a lista de usuários</a>
 	</div>
 </body>
 </html>

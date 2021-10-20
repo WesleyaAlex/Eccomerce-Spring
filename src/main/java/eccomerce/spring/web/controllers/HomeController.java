@@ -17,6 +17,7 @@ public class HomeController {
 
 	@Autowired
 	private ProdutoRepositorio produtoRepo;
+	
 	@Autowired
 	private ProdutoImagensRepositorio produtoImagensRepo;
 	
@@ -26,7 +27,7 @@ public class HomeController {
 	
 	@GetMapping
 	public String produtos(Model model) {
-		model.addAttribute("listaProdutos", produtoRepo.findAll());
+		model.addAttribute("listaProdutos", produtoRepo.findByStatusTrue());
 		return "index";
 	}
 	
