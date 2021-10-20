@@ -10,7 +10,7 @@
 <body>
 	<div class="container-fluid bg-secondary">
 		<nav class="container d-flex justify-content-between align-items-center py-3">
-		  <img src="" alt="img-logo">
+		  <span class="text-white" th:if="${session.usuario}" th:text="'Seja bem vindo ' + ${session.usuario.nome}">!</span>
 		  <div class="d-flex align-items-center">
 		  	<div class="d-flex align-items-center">
 		  		<a class="btn btn-outline-info mr-3" href="/backoffice/produtos">Listar Produtos</a>
