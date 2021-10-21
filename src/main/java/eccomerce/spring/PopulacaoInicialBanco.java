@@ -30,9 +30,6 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 		Produto produto6 = new Produto("PS4", "Esse é mais caro", 1299.99, 5, true,"circulo.jpg");
 		Produto produto7 = new Produto("Xbox", "Esse é mais barato", 399.99, 10, true,"circulo.jpg");
 		Produto produto8 = new Produto("PS4", "Esse é mais caro", 1299.99, 5, true,"circulo.jpg");
-		
-		Usuario user1 = new Usuario("admin@email.com", "admin", "admin", "admin", "50501985859", "admin", true);
-		 
 		produtoRepo.save(produto1);
 		produtoRepo.save(produto2);
 		produtoRepo.save(produto3);
@@ -42,6 +39,9 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 		produtoRepo.save(produto7);
 		produtoRepo.save(produto8);
 		
+		Usuario user1 = new Usuario("admin@email.com", "$2a$10$F4jLqv83pLKFgmi81frTJuAhZT7pn0xNkLxxhnRebVK0rQxjfifcW", "$2a$10$F4jLqv83pLKFgmi81frTJuAhZT7pn0xNkLxxhnRebVK0rQxjfifcW", "admin", "50501985859", "admin", true);
+		Usuario user2 = new Usuario("estoquista@email.com", "$2a$10$reR1mTPLT9qu/TfF2cvI0e1H9W4Bg3EgHGYlmcw7huEiji7KnAi2K", "$2a$10$reR1mTPLT9qu/TfF2cvI0e1H9W4Bg3EgHGYlmcw7huEiji7KnAi2K", "admin", "50501985859", "estoquista", true);
 		userRepo.save(user1);
+		userRepo.save(user2);
 	}
 }

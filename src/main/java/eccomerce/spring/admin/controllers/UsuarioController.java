@@ -1,7 +1,6 @@
 package eccomerce.spring.admin.controllers;
 
 import java.util.Optional;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import eccomerce.spring.admin.models.Usuario;
 import eccomerce.spring.admin.repositories.UsuarioRepositorio;
 
@@ -23,23 +20,6 @@ public class UsuarioController {
 	
 	public UsuarioController(UsuarioRepositorio usuarioRepo) {
 		this.usuarioRepo = usuarioRepo;
-	}
-	
-	@GetMapping("/login")
-	public String login(Model model) {
-		return "backoffice/login/index";
-	}
-	
-	@PostMapping("/logar")
-	public String logar(Model model, @RequestParam("email") String email, @RequestParam("senha") String senha, HttpSession session) {
-		Usuario user = usuarioRepo.findByEmail(email);
-		if (user != null) {
-			session.setAttribute("usuario", user);
-			return usuarios(model);
-		}
-		
-		model.addAttribute("msgLogin", "Erro ao efetuar o login, usuário inválido!");
-		return "redirect:/login";
 	}
 	
 	@GetMapping("/backoffice/usuarios")
@@ -71,6 +51,8 @@ public class UsuarioController {
 		}
 		
 		usuario.setStatus(true);
+		System.out.println("emailllllllllllllllll"+usuario.getEmail());
+		System.out.println("senhaaaaaaaaaaaaaaaaaaaaaaaa"+usuario.getSenha());
 		usuarioRepo.save(usuario);
 		
 		return "redirect:/backoffice/usuarios";

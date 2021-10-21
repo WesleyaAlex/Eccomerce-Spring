@@ -11,12 +11,13 @@
 	<div class="container-fluid bg-secondary">
 		<nav class="container d-flex justify-content-between align-items-center py-3">
 		  <span class="text-white" th:if="${session.usuario}" th:text="'Seja bem vindo ' + ${session.usuario.nome}">!</span>
+		  <img src="" th:unless="${session.usuario}" alt="img-logo">
 		  <div class="d-flex align-items-center">
 		  	<div class="d-flex align-items-center">
 		  		<a class="btn btn-outline-info mr-3" href="/backoffice/produtos">Listar Produtos</a>
 		        <a class="btn btn-outline-info mr-3" href="/backoffice/usuarios">Listar Usuários</a>
 		  	</div>
-		    <img src="" alt="img-logout">
+		    <a href="/logout"><img src="" alt="img-logout"></a>
 		  </div>
 		</nav>
 	</div>

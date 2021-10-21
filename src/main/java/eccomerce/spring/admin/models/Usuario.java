@@ -1,17 +1,20 @@
 package eccomerce.spring.admin.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.Table;
-//import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-//@Table(name = "Usuario", uniqueConstraints= { @UniqueConstraint(columnNames ={"email"})})
-public class Usuario {
+public class Usuario implements UserDetails {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +40,7 @@ public class Usuario {
     private String grupo;
     
     private boolean status;
-
+    
     public Usuario() {}
 
     public Usuario(String email, String senha, String confirmSenha, String nome, String cpf, String grupo, boolean status) {
@@ -113,4 +116,43 @@ public class Usuario {
     public void setStatus(boolean status) {
         this.status = status;
     }
+    
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		String ROLE_PREFIX = "ROLE_";
+		
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+        list.add(new SimpleGrantedAuthority(ROLE_PREFIX + this.grupo.toUpperCase()));
+        return list;
+	}
+
+	@Override
+	public String getPassword() {
+		return this.getSenha();
+	}
+
+	@Override
+	public String getUsername() {
+		return this.getEmail();
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
