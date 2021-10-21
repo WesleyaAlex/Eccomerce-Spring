@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -87,14 +88,28 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/backoffice/usuario/salvar")
-	public String salvarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult) {
+	public String salvarUsuario(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String email;    
+			if (principal instanceof UserDetails) {
+				email = ((UserDetails)principal).getUsername();
+			} else {
+				email = principal.toString();
+			}
+			
+			Usuario user = usuarioRepo.findByEmail(email);
+			
+			model.addAttribute("userLogado", user);
 			return "backoffice/usuario/form";
 		}
 		
 		usuario.setStatus(true);
-		System.out.println("emailllllllllllllllll"+usuario.getEmail());
-		System.out.println("senhaaaaaaaaaaaaaaaaaaaaaaaa"+usuario.getSenha());
+
+		String senha = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(senha);
+		usuario.setConfirmSenha(senha);
+		
 		usuarioRepo.save(usuario);
 		
 		return "redirect:/backoffice/usuarios";
