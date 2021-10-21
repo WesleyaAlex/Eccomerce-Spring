@@ -1,8 +1,10 @@
 package eccomerce.spring.admin.controllers;
 
 import java.util.Optional;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,14 +24,42 @@ public class UsuarioController {
 		this.usuarioRepo = usuarioRepo;
 	}
 	
+	@GetMapping("/acessoNegado")
+	public String acessoNegado() {
+		return "backoffice/login/acessoNegado";
+	}
+	
 	@GetMapping("/backoffice/usuarios")
 	public String usuarios(Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String email;    
+		if (principal instanceof UserDetails) {
+			email = ((UserDetails)principal).getUsername();
+		} else {
+			email = principal.toString();
+		}
+		
+		Usuario user = usuarioRepo.findByEmail(email);
+		
+		model.addAttribute("userLogado", user);
 		model.addAttribute("listaUsuarios", usuarioRepo.findAll());
 		return "backoffice/usuario/index";
 	}
 	
 	@GetMapping("/backoffice/usuario/{id}")
 	public String alterarUsuario(@PathVariable("id") long id, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String email;    
+		if (principal instanceof UserDetails) {
+			email = ((UserDetails)principal).getUsername();
+		} else {
+			email = principal.toString();
+		}
+		
+		Usuario user = usuarioRepo.findByEmail(email);
+		
+		model.addAttribute("userLogado", user);
+		
 		Optional<Usuario> usuario = usuarioRepo.findById(id);
 		if (usuario.isEmpty()) {
 			throw new IllegalArgumentException("Usuario inválido!");
@@ -40,7 +70,19 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/backoffice/usuario/cadastrar")
-	public String cadastrarUsuario(@ModelAttribute("usuario") Usuario usuario) {
+	public String cadastrarUsuario(@ModelAttribute("usuario") Usuario usuario, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String email;    
+		if (principal instanceof UserDetails) {
+			email = ((UserDetails)principal).getUsername();
+		} else {
+			email = principal.toString();
+		}
+		
+		Usuario user = usuarioRepo.findByEmail(email);
+		
+		model.addAttribute("userLogado", user);
+		
 		return "backoffice/usuario/form";
 	}
 	

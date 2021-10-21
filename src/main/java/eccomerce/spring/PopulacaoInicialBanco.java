@@ -39,9 +39,11 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 		produtoRepo.save(produto7);
 		produtoRepo.save(produto8);
 		
-		Usuario user1 = new Usuario("admin@email.com", "$2a$10$F4jLqv83pLKFgmi81frTJuAhZT7pn0xNkLxxhnRebVK0rQxjfifcW", "$2a$10$F4jLqv83pLKFgmi81frTJuAhZT7pn0xNkLxxhnRebVK0rQxjfifcW", "admin", "50501985859", "admin", true);
-		Usuario user2 = new Usuario("estoquista@email.com", "$2a$10$reR1mTPLT9qu/TfF2cvI0e1H9W4Bg3EgHGYlmcw7huEiji7KnAi2K", "$2a$10$reR1mTPLT9qu/TfF2cvI0e1H9W4Bg3EgHGYlmcw7huEiji7KnAi2K", "admin", "50501985859", "estoquista", true);
+		Usuario user1 = new Usuario("admin@email.com", "$2a$10$F4jLqv83pLKFgmi81frTJuAhZT7pn0xNkLxxhnRebVK0rQxjfifcW", "$2a$10$F4jLqv83pLKFgmi81frTJuAhZT7pn0xNkLxxhnRebVK0rQxjfifcW", "Wesley", "50501985859", "Admin", true);
+		Usuario user2 = new Usuario("estoquista@email.com", "$2a$10$reR1mTPLT9qu/TfF2cvI0e1H9W4Bg3EgHGYlmcw7huEiji7KnAi2K", "$2a$10$reR1mTPLT9qu/TfF2cvI0e1H9W4Bg3EgHGYlmcw7huEiji7KnAi2K", "Wesley", "50501985859", "Estoquista", true);
+		Usuario user3 = new Usuario("cliente@email.com", "$2a$10$k2.akx231FErOhgfGqmDa.sEYPamM8h/SGuGXvwazJv4mgxkDlw/.", "$2a$10$k2.akx231FErOhgfGqmDa.sEYPamM8h/SGuGXvwazJv4mgxkDlw/.", "Wesley", "50501985859", "Cliente", true);
 		userRepo.save(user1);
 		userRepo.save(user2);
+		userRepo.save(user3);
 	}
 }

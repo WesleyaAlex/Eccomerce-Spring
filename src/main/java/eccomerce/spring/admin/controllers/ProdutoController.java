@@ -10,6 +10,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,13 +25,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import eccomerce.spring.admin.models.Produto;
 import eccomerce.spring.admin.models.ProdutoImagens;
+import eccomerce.spring.admin.models.Usuario;
 import eccomerce.spring.admin.repositories.ProdutoImagensRepositorio;
 import eccomerce.spring.admin.repositories.ProdutoRepositorio;
+import eccomerce.spring.admin.repositories.UsuarioRepositorio;
 
 @Controller
 public class ProdutoController {
 
 	private ProdutoRepositorio produtoRepo;
+	@Autowired
+	private UsuarioRepositorio usuarioRepo;
 	@Autowired
 	private ProdutoImagensRepositorio produtoImagensRepo;
 	public static String uploadDirectory = "src\\main\\resources\\static\\uploads\\";
@@ -40,12 +46,35 @@ public class ProdutoController {
 	
 	@GetMapping("/backoffice/produtos")
 	public String produtos(Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String email;    
+		if (principal instanceof UserDetails) {
+			email = ((UserDetails)principal).getUsername();
+		} else {
+			email = principal.toString();
+		}
+		
+		Usuario user = usuarioRepo.findByEmail(email);
+		
+		model.addAttribute("userLogado", user);
 		model.addAttribute("listaProdutos", produtoRepo.findAll());
 		return "backoffice/produto/index";
 	}
 	
 	@GetMapping("/backoffice/produto/{id}")
 	public String alterarProduto(@PathVariable("id") long id, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String email;    
+		if (principal instanceof UserDetails) {
+			email = ((UserDetails)principal).getUsername();
+		} else {
+			email = principal.toString();
+		}
+		
+		Usuario user = usuarioRepo.findByEmail(email);
+		
+		model.addAttribute("userLogado", user);
+		
 		Optional<Produto> produto = produtoRepo.findById(id);
 		if (produto.isEmpty()) {
 			throw new IllegalArgumentException("Produto inválido!");
@@ -56,7 +85,18 @@ public class ProdutoController {
 	}
 	
 	@GetMapping("/backoffice/produto/cadastrar")
-	public String cadastrarProduto(@ModelAttribute("produto") Produto produto) {
+	public String cadastrarProduto(@ModelAttribute("produto") Produto produto, Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String email;    
+		if (principal instanceof UserDetails) {
+			email = ((UserDetails)principal).getUsername();
+		} else {
+			email = principal.toString();
+		}
+		
+		Usuario user = usuarioRepo.findByEmail(email);
+		
+		model.addAttribute("userLogado", user);
 		return "backoffice/produto/form";
 	}
 	
