@@ -34,3 +34,7 @@
 .carousel-item {
 	height: 18rem;
 }
+
+a {
+	text-decoration: none;
+}

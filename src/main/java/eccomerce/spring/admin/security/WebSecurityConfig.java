@@ -35,7 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET, "/backoffice/usuario/cadastrar").hasAnyRole("ADMIN", "ESTOQUISTA")
         .antMatchers(HttpMethod.GET, "/backoffice/usuario/excluir/{id}").hasAnyRole("ADMIN", "ESTOQUISTA")
         .antMatchers(HttpMethod.POST, "/backoffice/usuario/salvar").hasAnyRole("ADMIN", "ESTOQUISTA")
-        .anyRequest().authenticated()
+        .anyRequest().permitAll()
+        //.anyRequest().authenticated()
         .and().formLogin().permitAll()
         .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/backoffice/produtos");
         httpSecurity.exceptionHandling().accessDeniedPage("/acessoNegado");

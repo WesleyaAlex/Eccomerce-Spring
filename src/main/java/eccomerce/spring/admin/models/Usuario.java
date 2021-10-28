@@ -13,6 +13,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import eccomerce.spring.admin.validation.SenhasIguais;
+
+@SenhasIguais
 @Entity
 public class Usuario implements UserDetails {
 
@@ -24,19 +27,19 @@ public class Usuario implements UserDetails {
 	@Email(message = "O campo email deve estar no formato correto!")
     private String email;
     
-	@NotBlank(message = "O campo email não pode estar vazio!")
+	@NotBlank(message = "O campo senha não pode estar vazio!")
     private String senha;
     
-	@NotBlank(message = "O campo email não pode estar vazio!")
+	@NotBlank(message = "O campo confirme a senha não pode estar vazio!")
     private String confirmSenha;
 
-	@NotBlank(message = "O campo email não pode estar vazio!")
+	@NotBlank(message = "O campo nome não pode estar vazio!")
     private String nome;
     
-	@NotBlank(message = "O campo email não pode estar vazio!")
+	@NotBlank(message = "O campo cpf não pode estar vazio!")
     private String cpf;
     
-	@NotBlank(message = "O campo email não pode estar vazio!")
+	@NotBlank(message = "O campo grupo não pode estar vazio!")
     private String grupo;
     
     private boolean status;

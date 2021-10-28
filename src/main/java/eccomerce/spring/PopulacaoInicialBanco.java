@@ -1,14 +1,25 @@
 package eccomerce.spring;
 
+import java.time.LocalDate;
+
 import javax.transaction.Transactional;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import eccomerce.spring.admin.models.Produto;
 import eccomerce.spring.admin.models.Usuario;
 import eccomerce.spring.admin.repositories.ProdutoRepositorio;
 import eccomerce.spring.admin.repositories.UsuarioRepositorio;
+import eccomerce.spring.web.models.Cliente;
+import eccomerce.spring.web.models.ClienteEnderecos;
+import eccomerce.spring.web.repositories.ClienteEnderecosRepositorio;
+import eccomerce.spring.web.repositories.ClienteRepositorio;
 
 @Component
 @Transactional
@@ -19,6 +30,12 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 	
 	@Autowired
 	private UsuarioRepositorio userRepo;
+	
+	@Autowired
+	private ClienteRepositorio clienteRepo;
+	
+	@Autowired
+	private ClienteEnderecosRepositorio clientEnderecosRepo;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -45,5 +62,12 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 		userRepo.save(user1);
 		userRepo.save(user2);
 		userRepo.save(user3);
+		
+		LocalDate date = LocalDate.of(2020, 1, 8);
+		Cliente cliente1 = new Cliente("Wesley", "cliente@gmail.com", "05819370", "masculino", date, "$2a$10$Udqav1CQFuD19ve4QSTld.FAZnqzxoJTBDakvbUT8Oi/CL8TO1VTu","$2a$10$Udqav1CQFuD19ve4QSTld.FAZnqzxoJTBDakvbUT8Oi/CL8TO1VTu", "50501985859", "Rua Antonio Aranha", "Santa Josefina", "São Paulo", "SP");
+		clienteRepo.save(cliente1);
+		
+		ClienteEnderecos endereco1 = new ClienteEnderecos("50501985859", "Rua Antonio Aranha", "Santa Josefina", "São Paulo", "SP");
+		clientEnderecosRepo.save(endereco1);
 	}
 }

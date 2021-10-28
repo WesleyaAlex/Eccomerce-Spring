@@ -28,7 +28,7 @@ public class HomeController {
 	@GetMapping
 	public String produtos(Model model) {
 		model.addAttribute("listaProdutos", produtoRepo.findByStatusTrue());
-		return "index";
+		return "loja/home/index";
 	}
 	
 	@GetMapping("/produto/detalhes-eccomerce/{id}")
@@ -40,6 +40,6 @@ public class HomeController {
 		
 		model.addAttribute("produto", produto.get());
 		model.addAttribute("imagens", produtoImagensRepo.findAllByProdutoId(produto.get().getId()));
-		return "detalhesProduto";
+		return "loja/home/detalhesProduto";
 	}
 }

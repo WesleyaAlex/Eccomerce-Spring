@@ -24,6 +24,7 @@
 	<div class="container my-2">
 		<h1>Usuário</h1>
 		<hr>
+		<div th:if="${validacaoEmail}" class="text-danger my-3">Já existe um usuário com esse email!</div>
 		<form action="#" th:action="@{/backoffice/usuario/salvar}" th:object="${usuario}" method="POST">
 			<input type="hidden" id="id" th:field="*{id}">
 			
@@ -33,8 +34,8 @@
 			
 			<label class="form-label">Email: </label>
 			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger d-block"></span>
-	      	<input  type="text" th:if="${usuario.email == null}" th:field="*{email}" class="form-control mb-4 col-4">
-	      	<input  type="text" th:if="${usuario.email != null}" th:value="${usuario.email}" th:field="*{email}" class="form-control mb-4 col-4" readonly="readonly">
+	      	<input  type="text" th:if="${usuario.email == ''}" th:field="*{email}" class="form-control mb-4 col-4">
+	      	<input  type="text" th:if="${usuario.email != ''}" th:field="*{email}" class="form-control mb-4 col-4">
       		
       		<label class="form-label">CPF: </label>
       		<span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="text-danger d-block"></span>
@@ -50,6 +51,7 @@
 			
 			<label class="form-label">Senha: </label>
 			<span th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger d-block"></span>
+			<p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error text-danger" />
 			<input type="text" th:field="*{senha}" class="form-control mb-4 col-4">
 			
 			<label class="form-label">Confirme a senha: </label>

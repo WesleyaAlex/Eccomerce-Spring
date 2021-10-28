@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,9 +14,14 @@
 	        <img src="assets/images/logo-vasos.png" class="logo" alt="img-logo">
 	      </a>
 	
-	      <div> 
-            <a href ="/" class="me-1"><img src="/web/images/login.png" alt="Login"></a><span class="me-3">Login</span>
-            <a href ="/" class="me-1"><img src="/web/images/registration.png" alt="Registrar"></a><span class="me-3">Criar login</span>
+	      <div th:if="${session.cliente == null}"> 
+            <a href ="/loja/cliente/logar" class="me-1"><img src="/web/images/login.png" alt="Login"><span class="ms-1 me-3 text-dark">Login</span></a>
+            <a href ="/loja/cliente/cadastrar" class="me-1"><img src="/web/images/registration.png" alt="Registrar"><span class="ms-1 me-3 text-dark">Criar login</span></a>
+            <a href ="/" class="me-3"><img src="/web/images/carrinho.png" alt="Comprar"></a>
+	      </div>
+	      <div th:unless="${session.cliente == null}">
+	      	<a th:href="@{/loja/cliente/conta/{id}(id=${session.cliente.id})}" class="ms-1 me-3 text-dark">Minha conta</a>
+            <a href ="/loja/cliente/deslogar" class="me-1"><img src="/web/images/logout.png" alt="Login"><span class="ms-1 me-3 text-dark">Logout</span></a>
             <a href ="/" class="me-3"><img src="/web/images/carrinho.png" alt="Comprar"></a>
 	      </div>
 	    </header>

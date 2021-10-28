@@ -55,7 +55,6 @@ public class ProdutoController {
 		}
 		
 		Usuario user = usuarioRepo.findByEmail(email);
-		
 		model.addAttribute("userLogado", user);
 		model.addAttribute("listaProdutos", produtoRepo.findAll());
 		return "backoffice/produto/index";

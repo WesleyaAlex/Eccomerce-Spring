@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,18 +18,24 @@ public class Produto {
 	private Long id;
 	
 	@Size(max = 200, message = "O nome deve ter no máximo 200 caracteres!")
+	@NotBlank(message = "O campo nome não pode estar vazio!")
 	private String nome;
 
 	@Size(max = 2000, message = "A descrição deve ter no máximo 2000 caracteres!")
+	@NotBlank(message = "O campo descrição não pode estar vazio!")
 	private String descricao;
 
+	@NotNull(message = "O campo preço não pode estar vazio!")
+	@Min(value = 1, message = "O campo preço não pode estar vazio!")
 	private double preco;
 
+	@NotNull(message = "O campo quantidade não pode estar vazio!")
+	@Min(value = 1, message = "O campo preço não pode estar vazio!")
 	private int quantidade;
-
-	private boolean status;
 	
 	private String img;
+
+	private boolean status;
 	
 	public Produto() {}
 
