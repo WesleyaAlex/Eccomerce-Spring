@@ -73,6 +73,7 @@
 						<th>Bairro</th>
 						<th>Cidade</th>
 						<th>UF</th>
+						<th>Status</th>
 						<th></th>
 					</tr>
 				</thead>
@@ -83,8 +84,9 @@
 						<td th:text="${endereco.bairro}"></td>
 						<td th:text="${endereco.cidade}"></td>
 						<td th:text="${endereco.uf}"></td>
+						<td th:text="${endereco.status}"></td>
 						<td>
-							<a th:href="@{/loja/endereco/{id}(id=${endereco.id})}" class="btn btn-success">Alterar endereço</a>
+							<a th:href="@{/loja/endereco/excluir/{id}(id=${endereco.id})}" class="btn btn-success">Excluir endereço</a>
 						</td>
 					</tr>
 				</tbody>

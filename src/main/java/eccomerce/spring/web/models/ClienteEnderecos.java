@@ -28,18 +28,21 @@ public class ClienteEnderecos {
 	@NotBlank(message = "O campo uf não pode estar vazio!")
     private String uf;
 	
+	private boolean status;
+	
 	public ClienteEnderecos() {};
 	
 	public ClienteEnderecos(@NotBlank(message = "O campo CEP não pode estar vazio!") String cep,
 			@NotBlank(message = "O campo logradouro não pode estar vazio!") String logradouro,
 			@NotBlank(message = "O campo bairro não pode estar vazio!") String bairro,
 			@NotBlank(message = "O campo cidade não pode estar vazio!") String cidade,
-			@NotBlank(message = "O campo uf não pode estar vazio!") String uf) {
+			@NotBlank(message = "O campo uf não pode estar vazio!") String uf, boolean status) {
 		this.cep = cep;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.uf = uf;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -88,5 +91,13 @@ public class ClienteEnderecos {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

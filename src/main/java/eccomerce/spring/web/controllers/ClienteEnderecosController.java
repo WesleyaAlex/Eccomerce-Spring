@@ -30,17 +30,6 @@ public class ClienteEnderecosController {
 		return "loja/cliente/endereco/form";
 	}
 	
-	@GetMapping("/loja/endereco/{id}")
-	public String alterarEndereco(@PathVariable("id") long id, Model model) {
-		Optional<ClienteEnderecos> endereco = clienteEnderecosRepo.findById(id);
-		if (endereco.isEmpty()) {
-			throw new IllegalArgumentException("Endereço inválido!");
-		}
-
-		model.addAttribute("endereco", endereco.get());
-		return "loja/cliente/endereco/form";
-	}
-	
 	@PostMapping("/loja/endereco/salvar")
 	public String salvarEndereco(@Valid @ModelAttribute("endereco") ClienteEnderecos clienteEndereco, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -48,6 +37,7 @@ public class ClienteEnderecosController {
 			return "loja/cliente/endereco/form";
 		}
 		
+		clienteEndereco.setStatus(true);
 		clienteEnderecosRepo.save(clienteEndereco);
 		
 		return "redirect:/";
@@ -60,7 +50,8 @@ public class ClienteEnderecosController {
 			throw new IllegalArgumentException("Endereço inválido!");
 		}
 		
-		clienteEnderecosRepo.delete(endereco.get());
+		endereco.get().setStatus(false);
+		clienteEnderecosRepo.save(endereco.get());
 		return "redirect:/";
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,8 +74,11 @@ public class ClienteController {
 	public String logar(Model model, @RequestParam("email") String email, @RequestParam("senha") String senha, HttpSession session) {
 		Cliente cliente = clienteRepo.findByEmail(email);
 		if (cliente != null) {
-			session.setAttribute("cliente", cliente);
-			return "redirect:/";
+			boolean senhaAtualValida = BCrypt.checkpw(senha, cliente.getSenha());
+			if (senhaAtualValida) {
+				session.setAttribute("cliente", cliente);
+				return "redirect:/";
+			}
 		}
 
 		model.addAttribute("msgLogin", "Erro ao efetuar o login, cliente inválido!");
@@ -123,12 +127,12 @@ public class ClienteController {
 			return "loja/cliente/cadastrar";
 		}
 		
-//		String senha = new BCryptPasswordEncoder().encode(cliente.getSenha());
-//		cliente.setSenha(senha);
-//		cliente.setConfirmSenha(senha);
+		String senha = new BCryptPasswordEncoder().encode(cliente.getSenha());
+		cliente.setSenha(senha);
+		cliente.setConfirmSenha(senha);
 		
 		if(endereco_check.size() > 1) {
-			ClienteEnderecos endereco = new ClienteEnderecos(cliente.getCep(), cliente.getLogradouro(), cliente.getBairro(), cliente.getCidade(), cliente.getUf());
+			ClienteEnderecos endereco = new ClienteEnderecos(cliente.getCep(), cliente.getLogradouro(), cliente.getBairro(), cliente.getCidade(), cliente.getUf(), true);
 			clienteEnderecosRepo.save(endereco);
 		}
 		

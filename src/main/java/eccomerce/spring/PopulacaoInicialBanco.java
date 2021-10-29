@@ -67,7 +67,7 @@ public class PopulacaoInicialBanco implements CommandLineRunner {
 		Cliente cliente1 = new Cliente("Wesley", "cliente@gmail.com", "05819370", "masculino", date, "$2a$10$Udqav1CQFuD19ve4QSTld.FAZnqzxoJTBDakvbUT8Oi/CL8TO1VTu","$2a$10$Udqav1CQFuD19ve4QSTld.FAZnqzxoJTBDakvbUT8Oi/CL8TO1VTu", "50501985859", "Rua Antonio Aranha", "Santa Josefina", "São Paulo", "SP");
 		clienteRepo.save(cliente1);
 		
-		ClienteEnderecos endereco1 = new ClienteEnderecos("50501985859", "Rua Antonio Aranha", "Santa Josefina", "São Paulo", "SP");
+		ClienteEnderecos endereco1 = new ClienteEnderecos("05819-370", "Rua Antonio Aranha", "Santa Josefina", "São Paulo", "SP", true);
 		clientEnderecosRepo.save(endereco1);
 	}
 }
